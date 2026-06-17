@@ -204,8 +204,8 @@
 <div class="dashboard">
     <div class="header">
         <div>
-            <h1>📊 Baakie Dashboard <span>Live</span></h1>
-            <div class="sub">🔹 Realtime inzicht · vandaag</div>
+            <h1>Baakie Dashboard <span>Live</span></h1>
+            <div class="sub">Realtime inzicht · vandaag</div>
         </div>
         <button class="refresh-btn" onclick="loadData()">
             <svg viewBox="0 0 24 24">
@@ -227,28 +227,35 @@
     </div>
     <div class="footer">
         <span id="timestamp">Laatste update: laden...</span>
-        <span>🔄 Auto-refresh elke 30s</span>
+        <span>Auto-refresh elke 30s</span>
     </div>
 </div>
 <script>
-    const API_URL = 'https://baakie-dashboard-api-production.a-verboon.workers.dev/api/spaces';
+    // API URL - gebruikt dezelfde worker
+    const API_URL = window.location.origin + '/api/spaces';
+    
     async function loadData() {
         const table = document.getElementById('tableContainer');
         try {
             const response = await fetch(API_URL);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
             const data = await response.json();
+            
             document.getElementById('timestamp').textContent = 'Laatste update: ' + new Date().toLocaleString('nl-NL');
+            
             let total = 0, online = 0, degraded = 0, offline = 0;
             let html = '<table><thead><tr><th>Space</th><th>Status</th><th>Response</th></tr></thead><tbody>';
+            
             for (const [name, info] of Object.entries(data)) {
                 total++;
                 const status = info.status || 'unknown';
                 if (status === 'online') online++;
                 else if (status === 'degraded') degraded++;
                 else offline++;
+                
                 const dotClass = status === 'online' ? 'online' : status === 'degraded' ? 'degraded' : 'offline';
                 const responseTime = info.response_time ? info.response_time + 'ms' : '-';
+                
                 html += `<tr>
                     <td><strong>${name}</strong></td>
                     <td><span class="badge ${status}"><span class="status-dot ${dotClass}"></span>${status}</span></td>
@@ -256,15 +263,17 @@
                 </tr>`;
             }
             html += '</tbody></table>';
+            
             document.getElementById('total').textContent = total;
             document.getElementById('online').textContent = online;
             document.getElementById('degraded').textContent = degraded;
             document.getElementById('offline').textContent = offline;
             table.innerHTML = html;
         } catch (error) {
-            table.innerHTML = `<div class="error">❌ Fout bij laden: ${error.message}</div>`;
+            table.innerHTML = '<div class="error">Fout bij laden: ' + error.message + '</div>';
         }
     }
+    
     loadData();
     setInterval(loadData, 30000);
 </script>
