@@ -204,8 +204,8 @@
 <div class="dashboard">
     <div class="header">
         <div>
-            <h1>Baakie Dashboard <span>Live</span></h1>
-            <div class="sub">Realtime inzicht · vandaag</div>
+            <h1>🚀 Baakie Dashboard <span>Live</span></h1>
+            <div class="sub">🔹 Realtime inzicht · vandaag</div>
         </div>
         <button class="refresh-btn" onclick="loadData()">
             <svg viewBox="0 0 24 24">
@@ -227,12 +227,11 @@
     </div>
     <div class="footer">
         <span id="timestamp">Laatste update: laden...</span>
-        <span>Auto-refresh elke 30s</span>
+        <span>🔄 Auto-refresh elke 30s</span>
     </div>
 </div>
 <script>
-    // API URL - gebruikt dezelfde worker
-    const API_URL = window.location.origin + '/api/spaces';
+    const API_URL = '/api/spaces';
     
     async function loadData() {
         const table = document.getElementById('tableContainer');
@@ -256,11 +255,11 @@
                 const dotClass = status === 'online' ? 'online' : status === 'degraded' ? 'degraded' : 'offline';
                 const responseTime = info.response_time ? info.response_time + 'ms' : '-';
                 
-                html += `<tr>
-                    <td><strong>${name}</strong></td>
-                    <td><span class="badge ${status}"><span class="status-dot ${dotClass}"></span>${status}</span></td>
-                    <td>${responseTime}</td>
-                </tr>`;
+                html += '<tr>' +
+                    '<td><strong>' + name + '</strong></td>' +
+                    '<td><span class="badge ' + status + '"><span class="status-dot ' + dotClass + '"></span>' + status + '</span></td>' +
+                    '<td>' + responseTime + '</td>' +
+                '</tr>';
             }
             html += '</tbody></table>';
             
@@ -270,7 +269,7 @@
             document.getElementById('offline').textContent = offline;
             table.innerHTML = html;
         } catch (error) {
-            table.innerHTML = '<div class="error">Fout bij laden: ' + error.message + '</div>';
+            table.innerHTML = '<div class="error">❌ Fout bij laden: ' + error.message + '</div>';
         }
     }
     
