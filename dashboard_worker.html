@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Baakie Dashboard Live</title>
     <style>
-        /* --- Reset & basis --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f4f7fc;
@@ -21,7 +15,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .dashboard {
             max-width: 1100px;
             width: 100%;
@@ -30,8 +23,6 @@
             padding: 32px 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
         }
-
-        /* --- Header --- */
         .header {
             display: flex;
             justify-content: space-between;
@@ -40,25 +31,20 @@
             gap: 16px;
             margin-bottom: 28px;
         }
-
         .header h1 {
             font-size: 28px;
             font-weight: 700;
             color: #0b1a33;
             letter-spacing: -0.5px;
         }
-
         .header h1 span {
             color: #2563eb;
         }
-
         .header .sub {
             font-size: 14px;
             color: #64748b;
             margin-top: 4px;
         }
-
-        /* --- Refresh knop --- */
         .refresh-btn {
             background: #2563eb;
             border: none;
@@ -74,16 +60,13 @@
             transition: 0.2s;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
-
         .refresh-btn:hover {
             background: #1d4ed8;
             transform: scale(1.02);
         }
-
         .refresh-btn:active {
             transform: scale(0.94);
         }
-
         .refresh-btn svg {
             width: 18px;
             height: 18px;
@@ -93,15 +76,12 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-
-        /* --- Stats --- */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 16px;
             margin-bottom: 28px;
         }
-
         .stat {
             background: #f9faff;
             border-radius: 20px;
@@ -109,13 +89,11 @@
             text-align: center;
             border: 1px solid #eef2f8;
         }
-
         .stat .number {
             font-size: 32px;
             font-weight: 700;
             color: #0b1a33;
         }
-
         .stat .label {
             font-size: 14px;
             font-weight: 500;
@@ -124,8 +102,6 @@
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-
-        /* --- Tabel --- */
         .table-wrap {
             background: #f9faff;
             border-radius: 20px;
@@ -133,7 +109,6 @@
             border: 1px solid #eef2f8;
             overflow-x: auto;
         }
-
         .table-wrap h3 {
             font-size: 16px;
             font-weight: 600;
@@ -141,14 +116,12 @@
             padding: 0 16px 12px 16px;
             border-bottom: 1px solid #eef2f8;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
             min-width: 340px;
         }
-
         th {
             text-align: left;
             padding: 14px 16px 10px 16px;
@@ -158,19 +131,15 @@
             text-transform: uppercase;
             border-bottom: 1px solid #e2e8f0;
         }
-
         td {
             padding: 12px 16px;
             border-bottom: 1px solid #eef2f8;
             color: #0f172a;
             font-weight: 500;
         }
-
         tr:last-child td {
             border-bottom: none;
         }
-
-        /* --- Badges --- */
         .badge {
             padding: 4px 14px;
             border-radius: 40px;
@@ -180,40 +149,27 @@
             align-items: center;
             gap: 6px;
         }
-
         .badge.online {
             background: #d1fae5;
             color: #065f46;
         }
-
         .badge.degraded {
             background: #fef3c7;
             color: #92400e;
         }
-
         .badge.offline {
             background: #f8d7da;
             color: #721c24;
         }
-
         .status-dot {
             display: inline-block;
             width: 10px;
             height: 10px;
             border-radius: 50%;
         }
-
-        .status-dot.online {
-            background: #22c55e;
-        }
-        .status-dot.degraded {
-            background: #f59e0b;
-        }
-        .status-dot.offline {
-            background: #ef4444;
-        }
-
-        /* --- Footer --- */
+        .status-dot.online { background: #22c55e; }
+        .status-dot.degraded { background: #f59e0b; }
+        .status-dot.offline { background: #ef4444; }
         .footer {
             display: flex;
             justify-content: space-between;
@@ -226,13 +182,11 @@
             font-size: 13px;
             color: #94a3b8;
         }
-
         .footer .timestamp {
             background: #f1f5f9;
             padding: 4px 16px;
             border-radius: 40px;
         }
-
         .error {
             color: #b91c1c;
             background: #fee2e2;
@@ -240,21 +194,14 @@
             border-radius: 12px;
             margin-top: 12px;
         }
-
         @media (max-width: 600px) {
-            .dashboard {
-                padding: 20px 16px;
-            }
-            .header h1 {
-                font-size: 22px;
-            }
+            .dashboard { padding: 20px 16px; }
+            .header h1 { font-size: 22px; }
         }
     </style>
 </head>
 <body>
-
 <div class="dashboard">
-    <!-- HEADER -->
     <div class="header">
         <div>
             <h1>📊 Baakie Dashboard <span>Live</span></h1>
@@ -268,54 +215,40 @@
             Refresh
         </button>
     </div>
-
-    <!-- STATS -->
     <div class="stats" id="stats">
         <div class="stat"><div class="number" id="total">-</div><div class="label">Total</div></div>
         <div class="stat"><div class="number" id="online">-</div><div class="label">Online</div></div>
         <div class="stat"><div class="number" id="degraded">-</div><div class="label">Degraded</div></div>
         <div class="stat"><div class="number" id="offline">-</div><div class="label">Offline</div></div>
     </div>
-
-    <!-- TABLE -->
     <div class="table-wrap">
         <h3>Space Status</h3>
         <div id="tableContainer">Loading...</div>
     </div>
-
-    <!-- FOOTER -->
     <div class="footer">
         <span id="timestamp">Laatste update: laden...</span>
         <span>🔄 Auto-refresh elke 30s</span>
     </div>
 </div>
-
 <script>
     const API_URL = 'https://baakie-dashboard-api-production.a-verboon.workers.dev/api/spaces';
-
     async function loadData() {
         const table = document.getElementById('tableContainer');
-
         try {
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const data = await response.json();
-
             document.getElementById('timestamp').textContent = 'Laatste update: ' + new Date().toLocaleString('nl-NL');
-
             let total = 0, online = 0, degraded = 0, offline = 0;
             let html = '<table><thead><tr><th>Space</th><th>Status</th><th>Response</th></tr></thead><tbody>';
-
             for (const [name, info] of Object.entries(data)) {
                 total++;
                 const status = info.status || 'unknown';
                 if (status === 'online') online++;
                 else if (status === 'degraded') degraded++;
                 else offline++;
-
                 const dotClass = status === 'online' ? 'online' : status === 'degraded' ? 'degraded' : 'offline';
                 const responseTime = info.response_time ? info.response_time + 'ms' : '-';
-
                 html += `<tr>
                     <td><strong>${name}</strong></td>
                     <td><span class="badge ${status}"><span class="status-dot ${dotClass}"></span>${status}</span></td>
@@ -323,21 +256,17 @@
                 </tr>`;
             }
             html += '</tbody></table>';
-
             document.getElementById('total').textContent = total;
             document.getElementById('online').textContent = online;
             document.getElementById('degraded').textContent = degraded;
             document.getElementById('offline').textContent = offline;
             table.innerHTML = html;
-
         } catch (error) {
             table.innerHTML = `<div class="error">❌ Fout bij laden: ${error.message}</div>`;
         }
     }
-
     loadData();
     setInterval(loadData, 30000);
 </script>
-
 </body>
 </html>
