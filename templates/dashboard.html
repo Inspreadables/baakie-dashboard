@@ -1,0 +1,103 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Baakie Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 20px; }
+        .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 20px; }
+        .stat { background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+        .stat .number { font-size: 28px; font-weight: bold; }
+        .stat .label { font-size: 14px; color: #666; }
+        .table-wrap { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        .badge { padding: 2px 12px; border-radius: 12px; font-size: 12px; }
+        .badge.online { background: #d4edda; color: #155724; }
+        .badge.degraded { background: #fff3cd; color: #856404; }
+        .badge.offline { background: #f8d7da; color: #721c24; }
+        .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+        .status-dot.online { background: #28a745; }
+        .status-dot.degraded { background: #fd7e14; }
+        .status-dot.offline { background: #dc3545; }
+        .refresh-btn { margin: 16px 0; padding: 8px 16px; background: #2a6df4; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .error { color: red; background: #fdd; padding: 12px; border-radius: 8px; }
+        #debug { background: #f0f0f0; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 12px; white-space: pre-wrap; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <h1>📊 Baakie Dashboard</h1>
+    <p id="timestamp">Loading...</p>
+    <div id="debug" style="display:none;"></div>
+
+    <div class="stats" id="stats">
+        <div class="stat"><div class="number" id="total">-</div><div class="label">Total</div></div>
+        <div class="stat"><div class="number" id="online">-</div><div class="label">Online</div></div>
+        <div class="stat"><div class="number" id="degraded">-</div><div class="label">Degraded</div></div>
+        <div class="stat"><div class="number" id="offline">-</div><div class="label">Offline</div></div>
+    </div>
+
+    <button class="refresh-btn" onclick="loadData()">🔄 Refresh</button>
+
+    <div class="table-wrap">
+        <h3>Space Status</h3>
+        <div id="tableContainer">Loading...</div>
+    </div>
+
+    <script>
+        async function loadData() {
+            const debug = document.getElementById('debug');
+            const table = document.getElementById('tableContainer');
+            
+            try {
+                const response = await fetch('/api/spaces');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Update timestamp
+                document.getElementById('timestamp').textContent = 'Last updated: ' + new Date().toLocaleString();
+                
+                // Update stats
+                let total = 0, online = 0, degraded = 0, offline = 0;
+                let html = '<table><tr><th>Space</th><th>Status</th><th>Response</th><th>Last Checked</th></tr>';
+                
+                for (const [name, info] of Object.entries(data)) {
+                    total++;
+                    const status = info.status || 'unknown';
+                    if (status === 'online') online++;
+                    else if (status === 'degraded') degraded++;
+                    else offline++;
+                    
+                    const dotClass = status === 'online' ? 'online' : status === 'degraded' ? 'degraded' : 'offline';
+                    const lastChecked = info.last_checked ? new Date(info.last_checked).toLocaleString() : '-';
+                    
+                    html += `<tr>
+                        <td><strong>${name}</strong></td>
+                        <td><span class="badge ${status}"><span class="status-dot ${dotClass}"></span>${status}</span></td>
+                        <td>${info.response_time || '-'}ms</td>
+                        <td>${lastChecked}</td>
+                    </tr>`;
+                }
+                html += '</table>';
+                
+                document.getElementById('total').textContent = total;
+                document.getElementById('online').textContent = online;
+                document.getElementById('degraded').textContent = degraded;
+                document.getElementById('offline').textContent = offline;
+                table.innerHTML = html;
+                
+            } catch (error) {
+                table.innerHTML = `<div class="error">❌ Error loading data: ${error.message}</div>`;
+            }
+        }
+
+        // Laad bij openen
+        loadData();
+        // Refresh elke 30 seconden
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

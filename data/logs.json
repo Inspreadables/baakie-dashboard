@@ -1,0 +1,74 @@
+{
+  "logs": [
+    {
+      "timestamp": "2026-06-17T18:26:44.736240",
+      "space": "baakiedoc",
+      "old_status": "unknown",
+      "new_status": "degraded",
+      "message": "Space baakiedoc went from unknown to degraded"
+    },
+    {
+      "timestamp": "2026-06-17T18:26:44.736251",
+      "space": "baakiekwal",
+      "old_status": "unknown",
+      "new_status": "degraded",
+      "message": "Space baakiekwal went from unknown to degraded"
+    },
+    {
+      "timestamp": "2026-06-17T18:26:44.736255",
+      "space": "baakieprint",
+      "old_status": "unknown",
+      "new_status": "degraded",
+      "message": "Space baakieprint went from unknown to degraded"
+    },
+    {
+      "timestamp": "2026-06-17T18:26:44.736258",
+      "space": "baakiehtml",
+      "old_status": "unknown",
+      "new_status": "degraded",
+      "message": "Space baakiehtml went from unknown to degraded"
+    },
+    {
+      "timestamp": "2026-06-17T18:26:44.736260",
+      "space": "orchestrator",
+      "old_status": "unknown",
+      "new_status": "degraded",
+      "message": "Space orchestrator went from unknown to degraded"
+    },
+    {
+      "timestamp": "2026-06-17T18:47:10.822095",
+      "space": "baakiedoc",
+      "old_status": "degraded",
+      "new_status": "online",
+      "message": "Space baakiedoc went from degraded to online"
+    },
+    {
+      "timestamp": "2026-06-17T18:47:10.822112",
+      "space": "baakiekwal",
+      "old_status": "degraded",
+      "new_status": "online",
+      "message": "Space baakiekwal went from degraded to online"
+    },
+    {
+      "timestamp": "2026-06-17T18:47:10.822117",
+      "space": "baakieprint",
+      "old_status": "degraded",
+      "new_status": "online",
+      "message": "Space baakieprint went from degraded to online"
+    },
+    {
+      "timestamp": "2026-06-17T18:47:10.822120",
+      "space": "baakiehtml",
+      "old_status": "degraded",
+      "new_status": "online",
+      "message": "Space baakiehtml went from degraded to online"
+    },
+    {
+      "timestamp": "2026-06-17T18:47:10.822123",
+      "space": "orchestrator",
+      "old_status": "degraded",
+      "new_status": "online",
+      "message": "Space orchestrator went from degraded to online"
+    }
+  ]
+}
