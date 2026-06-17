@@ -3,45 +3,45 @@
     "name": "baakiedoc",
     "url": "https://www.perplexity.ai/spaces/baakiedoc-prod",
     "status": "online",
-    "response_time": 346.8,
+    "response_time": 372.2,
     "status_code": 200,
-    "last_checked": "2026-06-17T19:36:07.823067",
+    "last_checked": "2026-06-17T20:17:50.219972",
     "error": null
   },
   "baakiekwal": {
     "name": "baakiekwal",
     "url": "https://www.perplexity.ai/spaces/baakiekwal-prod",
     "status": "online",
-    "response_time": 308.1,
+    "response_time": 316.8,
     "status_code": 200,
-    "last_checked": "2026-06-17T19:36:08.132867",
+    "last_checked": "2026-06-17T20:17:50.538243",
     "error": null
   },
   "baakieprint": {
     "name": "baakieprint",
     "url": "https://www.perplexity.ai/spaces/baakieprint-prod",
     "status": "online",
-    "response_time": 302.2,
+    "response_time": 377.3,
     "status_code": 200,
-    "last_checked": "2026-06-17T19:36:08.436744",
+    "last_checked": "2026-06-17T20:17:50.917929",
     "error": null
   },
   "baakiehtml": {
     "name": "baakiehtml",
     "url": "https://www.perplexity.ai/spaces/baakiehtml-prod",
     "status": "online",
-    "response_time": 313.1,
+    "response_time": 323.2,
     "status_code": 200,
-    "last_checked": "2026-06-17T19:36:08.751393",
+    "last_checked": "2026-06-17T20:17:51.242462",
     "error": null
   },
   "orchestrator": {
     "name": "orchestrator",
     "url": "https://www.perplexity.ai/spaces/baakie-orchestrator-prod",
     "status": "online",
-    "response_time": 324.1,
+    "response_time": 346.0,
     "status_code": 200,
-    "last_checked": "2026-06-17T19:36:09.077100",
+    "last_checked": "2026-06-17T20:17:51.589888",
     "error": null
   }
 }
