@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baakie Dashboard Live</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="dashboard">
+    <div class="header">
+        <div>
+            <h1>🚀 Baakie Dashboard <span>Live</span></h1>
+            <div class="sub">🔹 Realtime inzicht · vandaag</div>
+        </div>
+        <button class="refresh-btn" onclick="loadData()">
+            <svg viewBox="0 0 24 24">
+                <path d="M1 4v6h6" />
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+            </svg>
+            Refresh
+        </button>
+    </div>
+    <div class="stats" id="stats">
+        <div class="stat"><div class="number" id="total">-</div><div class="label">Total</div></div>
+        <div class="stat"><div class="number" id="online">-</div><div class="label">Online</div></div>
+        <div class="stat"><div class="number" id="degraded">-</div><div class="label">Degraded</div></div>
+        <div class="stat"><div class="number" id="offline">-</div><div class="label">Offline</div></div>
+    </div>
+    <div class="table-wrap">
+        <h3>Space Status</h3>
+        <div id="tableContainer">Loading...</div>
+    </div>
+    <div class="footer">
+        <span id="timestamp">Laatste update: laden...</span>
+        <span>🔄 Auto-refresh elke 30s</span>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
